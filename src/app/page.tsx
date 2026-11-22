@@ -1,26 +1,25 @@
-import React from 'react';
 import { PublicNavbar } from '@/components/layout/PublicNavbar';
 import { PublicFooter } from '@/components/layout/PublicFooter';
 import { HeroSection } from '@/components/landing/HeroSection';
-import { PricingPreview } from '@/components/landing/PricingPreview';
 import { FeaturesGrid } from '@/components/landing/FeaturesGrid';
+import { PricingPreview } from '@/components/landing/PricingPreview';
 import { NetworkPreview } from '@/components/landing/NetworkPreview';
 import { SupportedDevices } from '@/components/landing/SupportedDevices';
 import { FaqPreview } from '@/components/landing/FaqPreview';
 
-export default function HomePage() {
+export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col bg-[#09090F]">
+    <>
       <PublicNavbar />
-      <main className="flex-1">
+      <main>
         <HeroSection />
         <FeaturesGrid />
-        <PricingPreview />
         <NetworkPreview />
+        <PricingPreview />
         <SupportedDevices />
         <FaqPreview />
       </main>
       <PublicFooter />
-    </div>
+    </>
   );
 }

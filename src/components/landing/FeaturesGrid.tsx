@@ -1,59 +1,69 @@
 import React from 'react';
-import { Headphones, Shield, Sliders, Zap } from 'lucide-react';
-
-const FEATURES = [
-  {
-    icon: Shield,
-    title: 'مسیرهای پایدار و رمزنگاری‌شده',
-    desc: 'مسیریابی هوشمند داده‌ها از طریق دیتاسنترهای اروپایی با پروتکل‌های مقاوم در برابر اختلال.',
-  },
-  {
-    icon: Zap,
-    title: 'راه‌اندازی سریع در چند ثانیه',
-    desc: 'تنها با کپی کردن لینک اشتراک اختصاصی در کلاینت‌های استاندارد روی تمام دستگاه‌های خود متصل شوید.',
-  },
-  {
-    icon: Sliders,
-    title: 'پنل مدیریت یکپارچه',
-    desc: 'مشاهده میزان ترافیک باقی‌مانده، تاریخ انقضا، تمدید اشتراک و سوابق سفارش در یک داشبورد.',
-  },
-  {
-    icon: Headphones,
-    title: 'پشتیبانی فنی در تلگرام',
-    desc: 'تیم پشتیبانی ISO VPN آماده راهنمایی جهت تنظیم کلاینت‌ها و انتخاب بهترین پروتکل است.',
-  },
-];
+import { Shield, Zap, Globe, Cpu } from 'lucide-react';
 
 export function FeaturesGrid() {
   return (
-    <section id="features" className="py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
-          <span className="inline-block px-3.5 py-1 rounded-full bg-[#151124] border border-violet-500/25 text-violet-300 text-xs font-bold">
-            مزایای شبکه ISO
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-black text-white">امکانات کلیدی زیرساخت ISO VPN</h2>
-          <p className="text-slate-400 text-xs sm:text-sm">
-            طراحی‌شده برای تجربه کاربری روان، شفاف و بدون پیچیدگی‌های فنی اضافی
-          </p>
+    <section className="py-32 relative">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="mb-20">
+          <div className="text-[10px] font-mono tracking-widest text-[#7A00FF] uppercase mb-4">Core Technology</div>
+          <h2 className="text-3xl sm:text-5xl font-black text-white leading-tight max-w-2xl">
+            معماری یک شبکه بدون نقص.
+          </h2>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {FEATURES.map((item, idx) => {
-            const Icon = item.icon;
-            return (
-              <div
-                key={idx}
-                className="p-6 rounded-2xl bg-[#0F0D18] border border-violet-500/15 hover:border-violet-500/40 transition-colors"
-              >
-                <div className="w-11 h-11 rounded-xl bg-[#18132B] border border-violet-500/25 flex items-center justify-center text-violet-400 mb-5">
-                  <Icon className="w-5 h-5" />
-                </div>
-                <h3 className="text-base font-bold text-white mb-2">{item.title}</h3>
-                <p className="text-xs text-slate-400 leading-relaxed">{item.desc}</p>
-              </div>
-            );
-          })}
+        {/* Asymmetric Bento Box Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <div className="md:col-span-2 editorial-card rounded-3xl p-10 flex flex-col justify-between min-h-[320px] group">
+            <div className="w-14 h-14 rounded-2xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-center text-white mb-8 group-hover:scale-105 transition-transform">
+              <Shield className="w-6 h-6 stroke-1" />
+            </div>
+            <div>
+              <h3 className="text-2xl font-bold text-white mb-4">تونل‌های رمزنگاری شده</h3>
+              <p className="text-sm text-slate-400 leading-relaxed max-w-md">
+                استفاده از پروتکل‌های مقاوم در برابر فیلترینگ هوشمند. داده‌های شما در لایه‌های تو در تو رمزنگاری شده و به عنوان ترافیک عادی اینترنت تشخیص داده می‌شود.
+              </p>
+            </div>
+          </div>
+
+          <div className="editorial-card rounded-3xl p-10 flex flex-col justify-between min-h-[320px] group">
+            <div className="w-14 h-14 rounded-2xl bg-[#7A00FF]/10 border border-[#7A00FF]/20 flex items-center justify-center text-[#B8A5FF] mb-8 group-hover:scale-105 transition-transform">
+              <Zap className="w-6 h-6 stroke-1" />
+            </div>
+            <div>
+              <h3 className="text-xl font-bold text-white mb-3">سرعت بی‌رقیب</h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                مسیریابی هوشمند و عدم اورسل (Oversell) ظرفیت سرورها، سرعت دانلود و آپلود شما را در بالاترین حد ممکن نگه می‌دارد.
+              </p>
+            </div>
+          </div>
+
+          <div className="editorial-card rounded-3xl p-10 flex flex-col justify-between min-h-[320px] group">
+            <div className="w-14 h-14 rounded-2xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-center text-white mb-8 group-hover:scale-105 transition-transform">
+              <Globe className="w-6 h-6 stroke-1" />
+            </div>
+            <div>
+              <h3 className="text-xl font-bold text-white mb-3">آی‌پی‌های ثابت</h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                اختصاص IP دیتاسنترهای معتبر اروپایی. مناسب‌ترین گزینه برای فعالیت در صرافی‌های ارز دیجیتال و دور زدن تحریم‌های سرویس‌های خارجی.
+              </p>
+            </div>
+          </div>
+
+          <div className="md:col-span-2 editorial-card rounded-3xl p-10 flex flex-col justify-between min-h-[320px] relative overflow-hidden group">
+            <div className="absolute right-0 bottom-0 w-64 h-64 bg-gradient-to-tl from-[#7A00FF]/10 to-transparent blur-3xl rounded-full" />
+            <div className="relative z-10 w-14 h-14 rounded-2xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-center text-white mb-8 group-hover:scale-105 transition-transform">
+              <Cpu className="w-6 h-6 stroke-1" />
+            </div>
+            <div className="relative z-10">
+              <h3 className="text-2xl font-bold text-white mb-4">زیرساخت اختصاصی ابری</h3>
+              <p className="text-sm text-slate-400 leading-relaxed max-w-md">
+                ما بر خلاف سرویس‌های عمومی، روی سرورهای ابری قدرتمند با پورت‌های ۱۰ گیگابیتی و پردازنده‌های نسل جدید متکی هستیم تا تجربه‌ای بدون قطعی خلق کنیم.
+              </p>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
