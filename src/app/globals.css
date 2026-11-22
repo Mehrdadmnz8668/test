@@ -2,44 +2,41 @@
 
 @layer base {
   :root {
-    --bg-canvas: #09090F;
-    --bg-surface: #0E0C13;
-    --bg-elevated: #13101B;
-    --violet-primary: #7C3AED;
-    --violet-glow: rgba(124, 58, 237, 0.15);
-    --border-subtle: rgba(255, 255, 255, 0.05);
+    --bg-canvas: #09090f;
+    --bg-surface: #0f0d18;
+    --bg-elevated: #151124;
+    --purple-deep: #241242;
+    --violet-accent: #7c3aed;
+    --violet-hover: #8b5cf6;
   }
 
-  html, body {
-    background-color: var(--bg-canvas);
-    color: #F8FAFC;
+  html {
+    background-color: #09090f;
+    color: #f8fafc;
     scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #09090f;
+    color: #f8fafc;
     font-feature-settings: "ss01";
   }
 }
 
-/* Premium Minimal Scrollbar */
-::-webkit-scrollbar { width: 5px; height: 5px; }
-::-webkit-scrollbar-track { background: #09090F; }
-::-webkit-scrollbar-thumb { background: #2A2438; border-radius: 10px; }
-::-webkit-scrollbar-thumb:hover { background: #7C3AED; }
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
 
-/* Custom Utilities for Luxury Minimalism */
-@layer utilities {
-  .glass-panel {
-    background: rgba(14, 12, 19, 0.7);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--border-subtle);
-  }
-  .card-premium {
-    background: linear-gradient(180deg, #110E18 0%, #0B0910 100%);
-    border: 1px solid var(--border-subtle);
-  }
-  .aurora-bg {
-    background: radial-gradient(circle at 50% -20%, var(--violet-glow), transparent 60%);
-  }
-  .text-glow {
-    text-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
-  }
+::-webkit-scrollbar-track {
+  background: #09090f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #271c42;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7c3aed;
 }

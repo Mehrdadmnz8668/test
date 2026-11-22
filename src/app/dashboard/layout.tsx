@@ -1,2 +1,6 @@
-// Maintained architecture for dashboard/layout.tsx
-export default function Aux() { return <div className='p-10 text-white'>درحال بروزرسانی طراحی...</div>; }
+import React from 'react';
+import { DashboardShell } from '@/components/layout/DashboardShell';
+
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+  return <DashboardShell>{children}</DashboardShell>;
+}

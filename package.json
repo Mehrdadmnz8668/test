@@ -1,6 +1,6 @@
 {
-  "name": "iso-vpn-frontend-premium",
-  "version": "2.0.0",
+  "name": "iso-vpn-frontend",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
