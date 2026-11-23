@@ -5,15 +5,14 @@ import {
   EyeOff, Menu, X, HardDrive, ChevronRight, TrendingUp, Search
 } from 'lucide-react';
 
-// Insert Vazirmatn Persian Font and Keyframes styling
 const StyleInjector = () => (
   <style>{`
     @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;300;400;500;600;700;800;900&display=swap');
     
     body {
       font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: #0A0211;
-      color: #faf5ff;
+      background-color: #090312;
+      color: #F5F0FF;
       overflow-x: hidden;
     }
 
@@ -22,14 +21,9 @@ const StyleInjector = () => (
       100% { transform: translateX(-50%); }
     }
 
-    @keyframes pulseGlow {
-      0%, 100% { opacity: 0.3; transform: scale(1); }
-      50% { opacity: 0.6; transform: scale(1.05); }
-    }
-
     @keyframes float {
       0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
+      50% { transform: translateY(-8px); }
     }
 
     .animate-marquee {
@@ -42,27 +36,29 @@ const StyleInjector = () => (
       animation-play-state: paused;
     }
 
-    .animate-pulse-glow {
-      animation: pulseGlow 6s ease-in-out infinite;
-    }
-
     .animate-float {
       animation: float 4s ease-in-out infinite;
     }
 
+    /* Core Card Component */
     .glass-card {
-      background: rgba(20, 5, 35, 0.65);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      background-color: #150526;
+      border: 1px solid #3B0764;
     }
 
     .glass-card-hover {
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
+    
     .glass-card-hover:hover {
-      background: rgba(30, 10, 50, 0.85);
-      border-color: rgba(168, 85, 247, 0.4);
-      box-shadow: 0 0 35px rgba(168, 85, 247, 0.2), 0 0 15px rgba(217, 70, 239, 0.15);
+      background-color: #1A0730;
+      border-color: #7A00FF;
+      box-shadow: 0 0 30px rgba(122, 0, 255, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .text-glow {
+      text-shadow: 0 0 20px rgba(147, 51, 234, 0.6);
     }
 
     .custom-scrollbar::-webkit-scrollbar {
@@ -70,14 +66,14 @@ const StyleInjector = () => (
       height: 6px;
     }
     .custom-scrollbar::-webkit-scrollbar-track {
-      background: rgba(20, 5, 35, 0.6);
+      background: #090312;
     }
     .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: #3b0764;
+      background: #3B0764;
       border-radius: 9999px;
     }
     .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-      background: #9333ea;
+      background: #7A00FF;
     }
   `}</style>
 );
@@ -95,7 +91,6 @@ const SERVERS = [
   { id: 'uk-1', country: 'انگلستان', city: 'لندن', flag: '🇬🇧', ping: 36, load: 33, protocol: 'WireGuard', region: 'europe', status: 'optimal' },
 ];
 
-// Supported Platforms
 const PLATFORMS = [
   { name: 'ویندوز (Windows)', icon: Monitor, desc: 'نسخه ۶۴ و ۳۲ بیت' },
   { name: 'آیفون (iOS)', icon: Smartphone, desc: 'سازگار با iOS 14+' },
@@ -106,7 +101,6 @@ const PLATFORMS = [
   { name: 'روتر و میکروتیک', icon: HardDrive, desc: 'پروتکل OpenVPN & WireGuard' },
 ];
 
-// Main Component
 export default function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [billingCycle, setBillingCycle] = useState('monthly');
@@ -114,7 +108,6 @@ export default function App() {
   const [activeServer, setActiveServer] = useState(SERVERS[0]);
   const [pingSearchQuery, setPingSearchQuery] = useState('');
   
-  // Speed Test State
   const [speedTestState, setSpeedTestState] = useState('idle');
   const [testProgress, setTestProgress] = useState(0);
   const [downloadSpeed, setDownloadSpeed] = useState(0);
@@ -179,255 +172,128 @@ export default function App() {
   };
 
   return (
-    <div dir="rtl" className="min-h-screen bg-[#0A0211] text-purple-50 selection:bg-fuchsia-500 selection:text-white relative">
+    <div dir="rtl" className="min-h-screen bg-[#090312] text-[#F5F0FF] selection:bg-[#9333EA] selection:text-white relative font-sans">
       <StyleInjector />
 
-      {/* Decorative Brand Neon Background Blurs */}
-      <div className="fixed top-0 right-1/4 w-96 h-96 bg-purple-600/15 rounded-full blur-[140px] pointer-events-none animate-pulse-glow" />
-      <div className="fixed top-1/3 left-10 w-[30rem] h-[30rem] bg-fuchsia-600/10 rounded-full blur-[160px] pointer-events-none animate-pulse-glow" style={{ animationDelay: '2s' }} />
-      <div className="fixed bottom-10 right-10 w-96 h-96 bg-violet-600/15 rounded-full blur-[150px] pointer-events-none" />
-
-      {/* Grid Pattern Overlay - Deep Violet */}
+      {/* Grid Pattern Overlay matching Hero Ref */}
       <div 
-        className="fixed inset-0 pointer-events-none opacity-[0.025]" 
+        className="fixed inset-0 pointer-events-none opacity-[0.04]" 
         style={{
-          backgroundImage: `radial-gradient(#9333ea 1px, transparent 1px)`,
-          backgroundSize: '24px 24px'
+          backgroundImage: `radial-gradient(#C084FC 1px, transparent 1px)`,
+          backgroundSize: '32px 32px'
         }}
       />
 
       {/* NAVIGATION BAR */}
-      <nav className="sticky top-0 z-50 backdrop-blur-xl bg-[#0A0211]/80 border-b border-purple-900/40 transition-all duration-300">
+      <nav className="sticky top-0 z-50 backdrop-blur-2xl bg-[#090312]/80 border-b border-[#3B0764] transition-all duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           
-          {/* Brand Logo */}
           <a href="#" className="flex items-center gap-3 group">
-            <div className="w-11 h-11 rounded-xl bg-gradient-to-tr from-purple-600 to-fuchsia-500 p-[2px] shadow-lg shadow-purple-500/20 group-hover:shadow-purple-500/40 transition-all duration-300">
-              <div className="w-full h-full bg-[#130524] rounded-[10px] flex items-center justify-center">
-                <Shield className="w-6 h-6 text-fuchsia-400 group-hover:scale-110 transition-transform duration-300 fill-fuchsia-400/20" />
-              </div>
+            <div className="w-10 h-10 rounded-full bg-[#150526] border border-[#3B0764] flex items-center justify-center shadow-lg group-hover:border-[#7A00FF] transition-all duration-300">
+              <Shield className="w-5 h-5 text-[#9333EA]" />
             </div>
             <div className="flex flex-col">
-              <span className="text-2xl font-extrabold tracking-wider bg-gradient-to-r from-white via-purple-100 to-purple-300 bg-clip-text text-transparent">
-                ISO <span className="text-fuchsia-400 font-black">VPN</span>
+              <span className="text-xl font-black tracking-wider text-[#F5F0FF]">
+                ISO <span className="text-[#9333EA]">VPN</span>
               </span>
-              <span className="text-[10px] text-fuchsia-400/80 font-medium tracking-widest -mt-1">ULTRA FAST & SECURE</span>
             </div>
           </a>
 
-          {/* Desktop Navigation Links */}
-          <div className="hidden md:flex items-center gap-8 font-medium text-sm text-purple-200/80">
-            <a href="#features" className="hover:text-fuchsia-400 transition-colors">ویژگی‌ها</a>
-            <a href="#dashboard" className="hover:text-fuchsia-400 transition-colors">داشبورد وضعیت</a>
-            <a href="#servers" className="hover:text-fuchsia-400 transition-colors">سرورها</a>
-            <a href="#pricing" className="hover:text-fuchsia-400 transition-colors">تعرفه‌ها</a>
-            <a href="#faq" className="hover:text-fuchsia-400 transition-colors">سوالات متداول</a>
+          <div className="hidden md:flex items-center gap-8 font-semibold text-sm text-[#B8A6CC]">
+            <a href="#features" className="hover:text-[#F5F0FF] transition-colors">ویژگی‌ها</a>
+            <a href="#dashboard" className="hover:text-[#F5F0FF] transition-colors">داشبورد وضعیت</a>
+            <a href="#servers" className="hover:text-[#F5F0FF] transition-colors">سرورها</a>
+            <a href="#pricing" className="hover:text-[#F5F0FF] transition-colors">تعرفه‌ها</a>
+            <a href="#faq" className="hover:text-[#F5F0FF] transition-colors">سوالات</a>
           </div>
 
-          {/* Action CTAs */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-3">
             <a 
               href="#pricing"
-              className="px-5 py-2.5 rounded-xl text-sm font-semibold text-purple-200 hover:text-white hover:bg-purple-900/40 border border-purple-800/40 transition-all"
+              className="px-6 py-2.5 rounded-full text-sm font-bold text-[#F5F0FF] bg-[#150526] border border-[#3B0764] hover:border-[#7A00FF] transition-all"
             >
-              ورود به ناحیه کاربری
+              ورود
             </a>
             <a 
               href="#pricing"
-              className="relative group px-6 py-2.5 rounded-xl text-sm font-bold text-white overflow-hidden bg-gradient-to-r from-violet-600 via-purple-500 to-fuchsia-500 shadow-[0_0_20px_rgba(168,85,247,0.3)] hover:shadow-[0_0_30px_rgba(217,70,239,0.5)] transition-all duration-300 active:scale-95"
+              className="px-6 py-2.5 rounded-full text-sm font-bold text-white bg-[#7A00FF] hover:bg-[#9333EA] shadow-[0_0_20px_rgba(122,0,255,0.4)] transition-all"
             >
-              <span className="relative z-10 flex items-center gap-2">
-                <Zap className="w-4 h-4 fill-current" />
-                خرید اشتراک اختصاصی
-              </span>
+              ثبت نام
             </a>
           </div>
 
-          {/* Mobile Menu Button */}
           <button 
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg bg-[#1a0833] border border-purple-800/50 text-purple-200 hover:text-fuchsia-400"
+            className="md:hidden p-2 rounded-full bg-[#150526] border border-[#3B0764] text-[#F5F0FF]"
           >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
 
-        {/* Mobile Dropdown Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden px-4 pt-2 pb-6 bg-[#0f041c]/95 border-b border-purple-900/50 backdrop-blur-2xl flex flex-col gap-4">
-            <a onClick={() => setIsMobileMenuOpen(false)} href="#features" className="py-2 text-purple-200 hover:text-fuchsia-400 border-b border-purple-900/40">ویژگی‌ها</a>
-            <a onClick={() => setIsMobileMenuOpen(false)} href="#dashboard" className="py-2 text-purple-200 hover:text-fuchsia-400 border-b border-purple-900/40">داشبورد وضعیت</a>
-            <a onClick={() => setIsMobileMenuOpen(false)} href="#servers" className="py-2 text-purple-200 hover:text-fuchsia-400 border-b border-purple-900/40">سرورها</a>
-            <a onClick={() => setIsMobileMenuOpen(false)} href="#pricing" className="py-2 text-purple-200 hover:text-fuchsia-400 border-b border-purple-900/40">تعرفه‌ها</a>
-            <a onClick={() => setIsMobileMenuOpen(false)} href="#faq" className="py-2 text-purple-200 hover:text-fuchsia-400">سوالات متداول</a>
-
-            <div className="flex flex-col gap-3 pt-2">
-              <a 
-                href="#pricing"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="w-full text-center py-3 rounded-xl bg-gradient-to-r from-purple-600 to-fuchsia-500 text-white font-bold shadow-lg shadow-purple-500/20"
-              >
-                خرید اشتراک اختصاصی
-              </a>
-            </div>
+          <div className="md:hidden px-4 pt-2 pb-6 bg-[#090312] border-b border-[#3B0764] flex flex-col gap-4">
+            <a onClick={() => setIsMobileMenuOpen(false)} href="#features" className="py-2 text-[#B8A6CC] border-b border-[#3B0764]">ویژگی‌ها</a>
+            <a onClick={() => setIsMobileMenuOpen(false)} href="#dashboard" className="py-2 text-[#B8A6CC] border-b border-[#3B0764]">داشبورد وضعیت</a>
+            <a onClick={() => setIsMobileMenuOpen(false)} href="#servers" className="py-2 text-[#B8A6CC] border-b border-[#3B0764]">سرورها</a>
+            <a onClick={() => setIsMobileMenuOpen(false)} href="#pricing" className="py-2 text-[#B8A6CC] border-b border-[#3B0764]">تعرفه‌ها</a>
+            <a onClick={() => setIsMobileMenuOpen(false)} href="#faq" className="py-2 text-[#B8A6CC]">سوالات متداول</a>
+            <a href="#pricing" className="w-full text-center py-3 rounded-full bg-[#7A00FF] text-white font-bold mt-2">
+              خرید اشتراک اختصاصی
+            </a>
           </div>
         )}
       </nav>
 
-      {/* HERO SECTION */}
-      <section className="relative pt-12 pb-24 lg:pt-20 lg:pb-32 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      {/* HERO SECTION (Reference #1 Style) */}
+      <section className="relative pt-20 pb-32 overflow-hidden flex items-center min-h-[85vh]">
+        {/* Massive Sweeping Glow/Arc Effect */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] sm:w-[120%] h-[800px] rounded-[100%] border-t border-[#7A00FF]/30 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#7A00FF]/20 via-[#090312]/0 to-transparent pointer-events-none" />
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+          <div className="flex flex-col items-center text-center max-w-4xl mx-auto space-y-8">
             
-            {/* Right Column: Copy & CTAs */}
-            <div className="lg:col-span-7 flex flex-col items-start space-y-8 text-right">
-              
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full glass-card border-purple-500/30 text-purple-200 text-xs sm:text-sm font-semibold shadow-inner bg-purple-950/30">
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-fuchsia-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-fuchsia-500"></span>
-                </span>
-                <span>نسل جدید پروتکل‌های ضد اختلال V2Ray & WireGuard 2026</span>
-                <Sparkles className="w-4 h-4 text-fuchsia-400" />
-              </div>
-
-              {/* Main Headline */}
-              <h1 className="text-4xl sm:text-6xl lg:text-6xl font-black tracking-tight leading-[1.2]">
-                تجربه آزادی کامل اینترنت با{' '}
-                <span className="bg-gradient-to-r from-violet-400 via-purple-400 to-fuchsia-500 bg-clip-text text-transparent">
-                  ایزو وی‌پی‌ان
-                </span>
-              </h1>
-
-              {/* Description */}
-              <p className="text-purple-200/80 text-base sm:text-lg lg:text-xl font-normal leading-relaxed max-w-2xl">
-                اتصال فوق‌سریع، بدون قطعی و کاملاً رمزنگاری‌شده بر روی تمامی اپراتورهای کشور. دسترسی نامحدود به یوتیوب، اینستاگرام، ترید و گیمینگ با پینگ پایدار.
-              </p>
-
-              {/* CTAs */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto pt-2">
-                <a
-                  href="#pricing"
-                  className="px-8 py-4 rounded-2xl bg-gradient-to-r from-violet-600 via-purple-500 to-fuchsia-500 text-white font-extrabold text-lg flex items-center justify-center gap-3 shadow-[0_0_35px_rgba(168,85,247,0.4)] hover:shadow-[0_0_50px_rgba(217,70,239,0.6)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
-                >
-                  <Zap className="w-5 h-5 fill-current" />
-                  شروع اتصال پرسرعت
-                  <ArrowLeft className="w-5 h-5" />
-                </a>
-
-                <a
-                  href="#dashboard"
-                  className="px-8 py-4 rounded-2xl glass-card hover:bg-purple-900/40 border border-purple-800/60 text-purple-100 font-bold text-base flex items-center justify-center gap-3 transition-all"
-                >
-                  <Activity className="w-5 h-5 text-fuchsia-400" />
-                  تست زنده سرعت شبکه
-                </a>
-              </div>
-
-              {/* Quick Trust Stats */}
-              <div className="grid grid-cols-3 gap-6 pt-6 border-t border-purple-900/40 w-full">
-                <div>
-                  <p className="text-2xl sm:text-3xl font-black text-white dir-ltr text-right">100K+</p>
-                  <p className="text-xs sm:text-sm text-purple-300/70 mt-1">کاربر فعال ماهانه</p>
-                </div>
-                <div>
-                  <p className="text-2xl sm:text-3xl font-black text-fuchsia-400 dir-ltr text-right">99.9%</p>
-                  <p className="text-xs sm:text-sm text-purple-300/70 mt-1">آپتایم تضمینی شبکه</p>
-                </div>
-                <div>
-                  <p className="text-2xl sm:text-3xl font-black text-purple-400 dir-ltr text-right">+500</p>
-                  <p className="text-xs sm:text-sm text-purple-300/70 mt-1">سرور اختصاصی پرسرعت</p>
-                </div>
-              </div>
-
+            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#150526] border border-[#3B0764] text-[#C084FC] text-xs sm:text-sm font-bold shadow-lg">
+              <Sparkles className="w-4 h-4" />
+              <span>نسل جدید پروتکل‌های V2Ray & WireGuard 2026</span>
             </div>
 
-            {/* Left Column: Interactive Cyber Dashboard Mockup */}
-            <div className="lg:col-span-5 relative">
-              <div className="relative rounded-3xl p-1 bg-gradient-to-b from-purple-500/40 via-[#10051b]/40 to-fuchsia-600/40 shadow-2xl shadow-purple-500/10">
-                <div className="bg-[#130524]/95 rounded-[22px] p-6 backdrop-blur-2xl space-y-6">
-                  
-                  {/* Status Header */}
-                  <div className="flex items-center justify-between pb-4 border-b border-purple-900/50">
-                    <div className="flex items-center gap-3">
-                      <div className="w-3 h-3 rounded-full bg-emerald-400 animate-ping" />
-                      <span className="text-sm font-bold text-emerald-400">وضعیت اتصال: ایمن و فعال</span>
-                    </div>
-                    <span className="text-xs px-2.5 py-1 rounded-full bg-[#1e0a38] border border-purple-800/50 text-purple-300 dir-ltr">
-                      VLESS-REALITY-UDP
-                    </span>
-                  </div>
+            <h1 className="text-5xl sm:text-7xl font-black tracking-tight leading-[1.1] text-[#F5F0FF]">
+              دسترسی به اینترنت آزاد.
+              <br />
+              <span className="text-[#9333EA] italic text-glow font-medium mt-2 block">بدون مرز و محدودیت.</span>
+            </h1>
 
-                  {/* Connected Location Card */}
-                  <div className="glass-card rounded-2xl p-4 flex items-center justify-between border-purple-500/20 bg-purple-950/20">
-                    <div className="flex items-center gap-3">
-                      <span className="text-3xl">🇩🇪</span>
-                      <div>
-                        <p className="font-bold text-sm text-white">آلمان - فرانکفورت (VIP)</p>
-                        <p className="text-xs text-purple-300/70">IP: 185.220.101.44</p>
-                      </div>
-                    </div>
-                    <div className="text-left">
-                      <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-400 bg-emerald-950/40 border border-emerald-800/30 px-2.5 py-1 rounded-lg">
-                        <Radio className="w-3 h-3" />
-                        24 ms
-                      </span>
-                    </div>
-                  </div>
+            <p className="text-[#B8A6CC] text-lg sm:text-xl font-normal leading-relaxed max-w-2xl">
+              اتصال فوق‌سریع، بدون قطعی و کاملاً رمزنگاری‌شده بر روی تمامی اپراتورهای کشور. دسترسی نامحدود به یوتیوب، اینستاگرام، ترید و گیمینگ با پینگ پایدار.
+            </p>
 
-                  {/* Dynamic Latency Visualizer */}
-                  <div>
-                    <div className="flex justify-between items-center text-xs text-purple-300/80 mb-2">
-                      <span>نمودار نوسان پینگ (زنده)</span>
-                      <span className="text-fuchsia-400 font-mono">میانگین: ۲۴ میلی‌ثانیه</span>
-                    </div>
-                    <div className="h-28 w-full flex items-end gap-1.5 pt-4 px-2 bg-[#0d0317] rounded-xl border border-purple-900/50">
-                      {chartData.map((val, idx) => (
-                        <div key={idx} className="flex-1 flex flex-col items-center gap-1 h-full justify-end group relative">
-                          <div 
-                            className="w-full bg-gradient-to-t from-violet-700 via-purple-500 to-fuchsia-400 rounded-t-sm transition-all duration-500" 
-                            style={{ height: `${(val / 40) * 100}%` }}
-                          />
-                          <div className="absolute -top-7 opacity-0 group-hover:opacity-100 bg-[#220a40] text-[10px] text-fuchsia-300 px-1.5 py-0.5 rounded border border-purple-500/30 transition-opacity pointer-events-none">
-                            {val}ms
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+            <div className="flex flex-col sm:flex-row items-center gap-4 pt-4">
+              <a
+                href="#pricing"
+                className="px-8 py-4 rounded-full bg-[#7A00FF] hover:bg-[#9333EA] text-white font-bold text-lg flex items-center justify-center shadow-[0_0_30px_rgba(122,0,255,0.4)] transition-all"
+              >
+                شروع اتصال پرسرعت
+              </a>
+              <a
+                href="#dashboard"
+                className="px-8 py-4 rounded-full bg-[#150526] hover:border-[#7A00FF] border border-[#3B0764] text-[#F5F0FF] font-bold text-lg transition-all"
+              >
+                تست زنده سرعت شبکه
+              </a>
+            </div>
 
-                  {/* Live Throughput Stats */}
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="bg-[#1a0833] p-3 rounded-xl border border-purple-800/40">
-                      <div className="flex items-center justify-between text-xs text-purple-300/70 mb-1">
-                        <span>سرعت دانلود</span>
-                        <Download className="w-3.5 h-3.5 text-fuchsia-400" />
-                      </div>
-                      <p className="text-lg font-black text-fuchsia-400 dir-ltr text-right">184.2 Mbps</p>
-                    </div>
-
-                    <div className="bg-[#1a0833] p-3 rounded-xl border border-purple-800/40">
-                      <div className="flex items-center justify-between text-xs text-purple-300/70 mb-1">
-                        <span>پروتکل فعال</span>
-                        <Lock className="w-3.5 h-3.5 text-purple-400" />
-                      </div>
-                      <p className="text-lg font-black text-purple-400 dir-ltr text-right">AES-256 GCM</p>
-                    </div>
-                  </div>
-
-                </div>
+            <div className="flex items-center justify-center gap-8 sm:gap-16 pt-12 border-t border-[#3B0764]/50 w-full max-w-2xl mt-12">
+              <div className="text-center">
+                <p className="text-3xl font-black text-[#F5F0FF] dir-ltr">100K+</p>
+                <p className="text-xs text-[#B8A6CC] mt-1">کاربر فعال</p>
               </div>
-
-              {/* Floating Shield Badge */}
-              <div className="absolute -bottom-6 -right-6 glass-card p-4 rounded-2xl border-purple-500/30 flex items-center gap-3 shadow-xl animate-float hidden sm:flex bg-[#16062b]">
-                <div className="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center text-emerald-400 border border-emerald-500/20">
-                  <CheckCircle2 className="w-6 h-6" />
-                </div>
-                <div>
-                  <p className="text-xs text-purple-300/80">محافظت نشت DNS / IPv6</p>
-                  <p className="text-sm font-bold text-purple-100">۱۰۰٪ ایزوله و امن</p>
-                </div>
+              <div className="text-center">
+                <p className="text-3xl font-black text-[#9333EA] dir-ltr">99.9%</p>
+                <p className="text-xs text-[#B8A6CC] mt-1">آپتایم شبکه</p>
+              </div>
+              <div className="text-center">
+                <p className="text-3xl font-black text-[#C084FC] dir-ltr">+500</p>
+                <p className="text-xs text-[#B8A6CC] mt-1">سرور اختصاصی</p>
               </div>
             </div>
 
@@ -436,25 +302,21 @@ export default function App() {
       </section>
 
       {/* PLATFORM SUPPORT INFINITE MARQUEE */}
-      <section className="py-8 bg-[#0d031a] border-y border-purple-900/40 overflow-hidden relative">
-        <div className="max-w-7xl mx-auto px-4 mb-4 text-center">
-          <p className="text-xs font-semibold text-purple-400/80 tracking-wider">سازگار با تمامی دستگاه‌ها و سیستم‌عامل‌ها</p>
-        </div>
-        
+      <section className="py-8 border-y border-[#3B0764] bg-[#090312] overflow-hidden relative">
         <div className="flex overflow-hidden relative w-full">
-          <div className="absolute top-0 bottom-0 right-0 w-24 bg-gradient-to-l from-[#0d031a] to-transparent z-10" />
-          <div className="absolute top-0 bottom-0 left-0 w-24 bg-gradient-to-r from-[#0d031a] to-transparent z-10" />
+          <div className="absolute top-0 bottom-0 right-0 w-32 bg-gradient-to-l from-[#090312] to-transparent z-10" />
+          <div className="absolute top-0 bottom-0 left-0 w-32 bg-gradient-to-r from-[#090312] to-transparent z-10" />
 
-          <div className="animate-marquee flex items-center gap-8">
+          <div className="animate-marquee flex items-center gap-6">
             {[...PLATFORMS, ...PLATFORMS, ...PLATFORMS].map((item, index) => {
               const IconComp = item.icon;
               return (
                 <div 
                   key={index} 
-                  className="flex items-center gap-3 px-6 py-3 rounded-2xl bg-[#17062e] border border-purple-800/40 hover:border-fuchsia-500/40 hover:bg-[#20093e] transition-all shrink-0"
+                  className="flex items-center gap-3 px-6 py-3 rounded-full bg-[#150526] border border-[#3B0764] shrink-0"
                 >
-                  <IconComp className="w-5 h-5 text-purple-400" />
-                  <span className="text-sm font-bold text-purple-100">{item.name}</span>
+                  <IconComp className="w-5 h-5 text-[#9333EA]" />
+                  <span className="text-sm font-bold text-[#F5F0FF]">{item.name}</span>
                 </div>
               );
             })}
@@ -462,88 +324,64 @@ export default function App() {
         </div>
       </section>
 
-      {/* SERVER STATUS DASHBOARD & SPEED TEST */}
-      <section id="dashboard" className="py-24 relative">
+      {/* SERVER STATUS DASHBOARD */}
+      <section id="dashboard" className="py-24 relative z-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-xs uppercase tracking-widest font-extrabold text-fuchsia-400 mb-2">NETWORK DIAGNOSTICS</h2>
-            <h3 className="text-3xl sm:text-5xl font-extrabold text-white mb-4">
-              داشبورد پایش هوشمند شبکه
-            </h3>
-            <p className="text-purple-200/70 text-base sm:text-lg">
-              پایش لحضه‌ای پینگ، پهنای باند و سنجش زنده کیفیت اتصال به سرورها
-            </p>
+            <h2 className="text-xs uppercase tracking-widest font-bold text-[#9333EA] mb-2">NETWORK DIAGNOSTICS</h2>
+            <h3 className="text-3xl sm:text-5xl font-black text-[#F5F0FF] mb-4">داشبورد پایش شبکه</h3>
+            <p className="text-[#B8A6CC] text-base">پایش لحظه‌ای پینگ و سنجش کیفیت اتصال</p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            
-            {/* Speed Test Interactive Instrument */}
-            <div className="lg:col-span-5 glass-card rounded-3xl p-6 sm:p-8 border-purple-800/40 flex flex-col justify-between">
-              <div>
-                <div className="flex items-center justify-between mb-6">
+            {/* Speed Test Panel */}
+            <div className="lg:col-span-5 glass-card rounded-3xl p-8 flex flex-col justify-between relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-[#7A00FF]/10 blur-[80px] pointer-events-none" />
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-8">
                   <div className="flex items-center gap-2">
-                    <Activity className="w-5 h-5 text-fuchsia-400" />
-                    <h4 className="font-bold text-lg text-white">تست زنده سرعت (Speedtest)</h4>
+                    <Activity className="w-5 h-5 text-[#9333EA]" />
+                    <h4 className="font-bold text-lg text-[#F5F0FF]">تست زنده سرعت</h4>
                   </div>
-                  <span className="text-xs font-mono px-2.5 py-1 rounded-md bg-[#1a0833] border border-purple-800/50 text-purple-300">
+                  <span className="text-[10px] font-mono px-3 py-1.5 rounded-full bg-[#090312] border border-[#3B0764] text-[#C084FC]">
                     LIVE PROBE
                   </span>
                 </div>
 
-                <div className="relative w-48 h-48 sm:w-56 sm:h-56 mx-auto my-6 flex items-center justify-center">
+                <div className="relative w-56 h-56 mx-auto my-8 flex items-center justify-center">
                   <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
-                    <circle
-                      cx="50"
-                      cy="50"
-                      r="40"
-                      className="text-purple-950/80"
-                      strokeWidth="8"
-                      stroke="currentColor"
-                      fill="transparent"
-                      strokeDasharray="251.2"
-                      strokeDashoffset="60"
-                    />
-                    <circle
-                      cx="50"
-                      cy="50"
-                      r="40"
-                      className="text-fuchsia-500 transition-all duration-300 drop-shadow-[0_0_8px_rgba(217,70,239,0.5)]"
-                      strokeWidth="8"
-                      strokeDasharray="251.2"
-                      strokeDashoffset={251.2 - (testProgress / 100) * 190}
-                      strokeLinecap="round"
-                      stroke="currentColor"
-                      fill="transparent"
+                    <circle cx="50" cy="50" r="40" className="text-[#090312]" strokeWidth="6" stroke="currentColor" fill="transparent" strokeDasharray="251.2" strokeDashoffset="60" />
+                    <circle 
+                      cx="50" cy="50" r="40" 
+                      className="text-[#9333EA] transition-all duration-300 drop-shadow-[0_0_10px_rgba(147,51,234,0.6)]" 
+                      strokeWidth="6" strokeDasharray="251.2" strokeDashoffset={251.2 - (testProgress / 100) * 190} 
+                      strokeLinecap="round" stroke="currentColor" fill="transparent" 
                     />
                   </svg>
-
-                  <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                    <span className="text-3xl sm:text-4xl font-black text-white dir-ltr">
-                      {speedTestState === 'testing' 
-                        ? (testProgress <= 50 ? downloadSpeed : uploadSpeed) 
-                        : (speedTestState === 'complete' ? downloadSpeed : '0')}
+                  <div className="absolute inset-0 flex flex-col items-center justify-center">
+                    <span className="text-4xl font-black text-[#F5F0FF] dir-ltr drop-shadow-md">
+                      {speedTestState === 'testing' ? (testProgress <= 50 ? downloadSpeed : uploadSpeed) : (speedTestState === 'complete' ? downloadSpeed : '0')}
                     </span>
-                    <span className="text-xs text-fuchsia-400 font-bold uppercase mt-1">Mbps</span>
-                    <span className="text-[11px] text-purple-400/80 mt-0.5">
+                    <span className="text-xs text-[#9333EA] font-bold mt-1">Mbps</span>
+                    <span className="text-[10px] text-[#B8A6CC] mt-1">
                       {speedTestState === 'testing' ? (testProgress <= 50 ? 'دانلود...' : 'آپلود...') : 'آماده تست'}
                     </span>
                   </div>
                 </div>
 
-                {/* Realtime Metrics */}
-                <div className="grid grid-cols-3 gap-2 py-4 bg-[#140526] rounded-2xl border border-purple-900/50 text-center">
+                <div className="grid grid-cols-3 gap-2 py-4 bg-[#090312]/50 rounded-2xl border border-[#3B0764] text-center">
                   <div>
-                    <span className="text-[11px] text-purple-300/60 block">پینگ (Ping)</span>
-                    <span className="font-bold text-emerald-400 text-sm dir-ltr">{livePing} ms</span>
+                    <span className="text-[10px] text-[#B8A6CC] block">پینگ</span>
+                    <span className="font-bold text-[#34D399] text-sm dir-ltr">{livePing} ms</span>
                   </div>
-                  <div className="border-x border-purple-900/50">
-                    <span className="text-[11px] text-purple-300/60 block">جیتر (Jitter)</span>
-                    <span className="font-bold text-fuchsia-400 text-sm dir-ltr">{liveJitter} ms</span>
+                  <div className="border-x border-[#3B0764]">
+                    <span className="text-[10px] text-[#B8A6CC] block">جیتر</span>
+                    <span className="font-bold text-[#C084FC] text-sm dir-ltr">{liveJitter} ms</span>
                   </div>
                   <div>
-                    <span className="text-[11px] text-purple-300/60 block">پکت لاس</span>
-                    <span className="font-bold text-purple-400 text-sm dir-ltr">0 %</span>
+                    <span className="text-[10px] text-[#B8A6CC] block">پکت لاس</span>
+                    <span className="font-bold text-[#F5F0FF] text-sm dir-ltr">0 %</span>
                   </div>
                 </div>
               </div>
@@ -551,79 +389,53 @@ export default function App() {
               <button
                 onClick={runSpeedTest}
                 disabled={speedTestState === 'testing'}
-                className={`w-full mt-6 py-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all ${
+                className={`w-full mt-6 py-4 rounded-full font-bold text-sm flex items-center justify-center gap-2 transition-all relative z-10 ${
                   speedTestState === 'testing'
-                    ? 'bg-[#1b0836] text-purple-400/50 cursor-not-allowed'
-                    : 'bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500 text-white shadow-lg shadow-purple-600/30'
+                    ? 'bg-[#090312] border border-[#3B0764] text-[#B8A6CC] cursor-not-allowed'
+                    : 'bg-[#7A00FF] hover:bg-[#9333EA] text-white shadow-[0_0_20px_rgba(122,0,255,0.4)]'
                 }`}
               >
                 <RefreshCw className={`w-4 h-4 ${speedTestState === 'testing' ? 'animate-spin' : ''}`} />
-                {speedTestState === 'testing' ? 'در حال سنجش سرعت...' : 'شروع سنجش پینگ و سرعت'}
+                {speedTestState === 'testing' ? 'در حال سنجش...' : 'شروع سنجش پینگ'}
               </button>
             </div>
 
-            {/* Network Statistics & Global Nodes Grid */}
-            <div className="lg:col-span-7 flex flex-col justify-between space-y-6">
+            {/* Network Analytics Panel */}
+            <div className="lg:col-span-7 glass-card rounded-3xl p-8">
+              <div className="flex justify-between items-center text-xs text-[#B8A6CC] mb-4">
+                <span>نمودار نوسان پینگ زنده</span>
+                <span className="text-[#9333EA] font-mono bg-[#090312] px-3 py-1 rounded-full border border-[#3B0764]">میانگین: ۲۴ms</span>
+              </div>
+              <div className="h-40 w-full flex items-end gap-2 pt-4 px-2">
+                {chartData.map((val, idx) => (
+                  <div key={idx} className="flex-1 flex flex-col items-center justify-end h-full relative group">
+                    <div 
+                      className="w-full bg-gradient-to-t from-[#3B0764] to-[#9333EA] rounded-t-md transition-all duration-500 hover:opacity-80" 
+                      style={{ height: `${(val / 40) * 100}%` }}
+                    />
+                    <div className="absolute -top-8 opacity-0 group-hover:opacity-100 bg-[#150526] text-[10px] text-[#C084FC] px-2 py-1 rounded-md border border-[#7A00FF] transition-opacity pointer-events-none">
+                      {val}ms
+                    </div>
+                  </div>
+                ))}
+              </div>
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="glass-card p-6 rounded-2xl border-purple-800/30 glass-card-hover">
-                  <div className="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center mb-4 border border-purple-500/20">
-                    <Server className="w-6 h-6" />
+              <div className="grid grid-cols-2 gap-4 mt-8 pt-8 border-t border-[#3B0764]">
+                <div className="flex items-center gap-4 p-4 rounded-2xl bg-[#090312] border border-[#3B0764]">
+                  <div className="p-3 rounded-full bg-[#150526] border border-[#7A00FF]/50"><Shield className="w-5 h-5 text-[#C084FC]" /></div>
+                  <div>
+                    <p className="text-xs text-[#B8A6CC]">پروتکل فعال</p>
+                    <p className="text-sm font-bold text-[#F5F0FF] dir-ltr mt-0.5">VLESS+Reality</p>
                   </div>
-                  <h5 className="text-purple-300/80 text-sm font-medium">کل سرورهای اختصاصی</h5>
-                  <p className="text-3xl font-black text-white mt-1 dir-ltr text-right">+520 Node</p>
-                  <p className="text-xs text-emerald-400 mt-2 flex items-center gap-1">
-                    <TrendingUp className="w-3.5 h-3.5" />
-                    ۱۰۰٪ سرورها آنلاین و با ترافیک نامحدود
-                  </p>
                 </div>
-
-                <div className="glass-card p-6 rounded-2xl border-purple-800/30 glass-card-hover">
-                  <div className="w-12 h-12 rounded-xl bg-fuchsia-500/10 text-fuchsia-400 flex items-center justify-center mb-4 border border-fuchsia-500/20">
-                    <Zap className="w-6 h-6" />
+                <div className="flex items-center gap-4 p-4 rounded-2xl bg-[#090312] border border-[#3B0764]">
+                  <div className="p-3 rounded-full bg-[#150526] border border-[#7A00FF]/50"><Server className="w-5 h-5 text-[#C084FC]" /></div>
+                  <div>
+                    <p className="text-xs text-[#B8A6CC]">گره متصل</p>
+                    <p className="text-sm font-bold text-[#F5F0FF] dir-ltr mt-0.5">Frankfurt-DE (VIP)</p>
                   </div>
-                  <h5 className="text-purple-300/80 text-sm font-medium">پروتکل فعال شبکه</h5>
-                  <p className="text-3xl font-black text-white mt-1 dir-ltr text-right">VLESS + WireGuard</p>
-                  <p className="text-xs text-purple-400 mt-2 flex items-center gap-1">
-                    <Check className="w-3.5 h-3.5" />
-                    عبور از قوی‌ترین فیلترینگ و GFW
-                  </p>
-                </div>
-
-                <div className="glass-card p-6 rounded-2xl border-purple-800/30 glass-card-hover">
-                  <div className="w-12 h-12 rounded-xl bg-violet-500/10 text-violet-400 flex items-center justify-center mb-4 border border-violet-500/20">
-                    <Globe className="w-6 h-6" />
-                  </div>
-                  <h5 className="text-purple-300/80 text-sm font-medium">کشورهای پوشش داده شده</h5>
-                  <p className="text-3xl font-black text-white mt-1 dir-ltr text-right">38 Country</p>
-                  <p className="text-xs text-purple-400/70 mt-2">اروپا، آسیا، آمریکا و خاورمیانه</p>
-                </div>
-
-                <div className="glass-card p-6 rounded-2xl border-purple-800/30 glass-card-hover">
-                  <div className="w-12 h-12 rounded-xl bg-pink-500/10 text-pink-400 flex items-center justify-center mb-4 border border-pink-500/20">
-                    <Shield className="w-6 h-6" />
-                  </div>
-                  <h5 className="text-purple-300/80 text-sm font-medium">رمزنگاری داده‌ها</h5>
-                  <p className="text-3xl font-black text-white mt-1 dir-ltr text-right">ChaCha20-Poly1305</p>
-                  <p className="text-xs text-emerald-400 mt-2">عدم ذخیره‌سازی لوگ (No-Logs Policy)</p>
                 </div>
               </div>
-
-              {/* Security Shield Banner */}
-              <div className="glass-card p-6 rounded-2xl border-purple-500/30 bg-gradient-to-r from-[#140526] via-[#140526] to-[#2a0e4d]/40 flex items-center justify-between">
-                <div className="space-y-1">
-                  <h4 className="font-bold text-white text-base">سیستم هوشمند Smart Routing</h4>
-                  <p className="text-xs text-purple-300/80">
-                    مسیریابی خودکار ترافیک از خلوت‌ترین پورت‌ها برای تضمین ثبات پینگ و عدم افت سرعت در ساعات شلوغی
-                  </p>
-                </div>
-                <div className="hidden sm:block">
-                  <span className="px-4 py-2 rounded-xl bg-purple-500/20 text-fuchsia-300 border border-purple-500/40 font-bold text-xs">
-                    فعال روی همه پلن‌ها
-                  </span>
-                </div>
-              </div>
-
             </div>
 
           </div>
@@ -631,30 +443,28 @@ export default function App() {
       </section>
 
       {/* SERVER SELECTION INTERFACE */}
-      <section id="servers" className="py-24 bg-[#0a0214]/60 border-t border-purple-900/40">
+      <section id="servers" className="py-24 border-t border-[#3B0764] bg-[#090312]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
             <div>
-              <h2 className="text-xs uppercase tracking-widest font-extrabold text-fuchsia-400 mb-2">SERVER INFRASTRUCTURE</h2>
-              <h3 className="text-3xl sm:text-4xl font-extrabold text-white">
-                لیست سرورهای اختصاصی ایزو وی‌پی‌ان
-              </h3>
+              <h2 className="text-xs uppercase tracking-widest font-bold text-[#9333EA] mb-2">INFRASTRUCTURE</h2>
+              <h3 className="text-3xl sm:text-4xl font-black text-[#F5F0FF]">لیست سرورهای اختصاصی</h3>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 items-center">
               <div className="relative w-full sm:w-64">
-                <Search className="w-4 h-4 absolute right-3 top-3.5 text-purple-400/60" />
+                <Search className="w-4 h-4 absolute right-3 top-3.5 text-[#B8A6CC]" />
                 <input
                   type="text"
-                  placeholder="جستجوی کشور یا شهر..."
+                  placeholder="جستجوی سرور..."
                   value={pingSearchQuery}
                   onChange={(e) => setPingSearchQuery(e.target.value)}
-                  className="w-full bg-[#150529] border border-purple-800/50 rounded-xl pr-10 pl-4 py-2.5 text-sm text-purple-100 placeholder-purple-400/50 focus:outline-none focus:border-fuchsia-500 transition-colors"
+                  className="w-full bg-[#150526] border border-[#3B0764] rounded-full pr-10 pl-4 py-2.5 text-sm text-[#F5F0FF] placeholder-[#B8A6CC] focus:outline-none focus:border-[#7A00FF] transition-colors"
                 />
               </div>
 
-              <div className="flex p-1 bg-[#150529] rounded-xl border border-purple-800/50 w-full sm:w-auto overflow-x-auto">
+              <div className="flex p-1.5 bg-[#150526] rounded-full border border-[#3B0764] w-full sm:w-auto overflow-x-auto">
                 {[
                   { id: 'all', label: 'همه سرورها' },
                   { id: 'europe', label: 'اروپا' },
@@ -664,10 +474,10 @@ export default function App() {
                   <button
                     key={tab.id}
                     onClick={() => setSelectedRegion(tab.id)}
-                    className={`px-4 py-2 rounded-lg text-xs font-bold transition-all whitespace-nowrap ${
+                    className={`px-5 py-2 rounded-full text-xs font-bold transition-all whitespace-nowrap ${
                       selectedRegion === tab.id
-                        ? 'bg-purple-600 text-white shadow-md shadow-purple-600/20'
-                        : 'text-purple-300 hover:text-white'
+                        ? 'bg-[#7A00FF] text-white shadow-[0_0_15px_rgba(122,0,255,0.4)]'
+                        : 'text-[#B8A6CC] hover:text-[#F5F0FF]'
                     }`}
                   >
                     {tab.label}
@@ -682,57 +492,49 @@ export default function App() {
               <div 
                 key={server.id}
                 onClick={() => setActiveServer(server)}
-                className={`glass-card p-5 rounded-2xl border cursor-pointer transition-all duration-300 relative overflow-hidden ${
+                className={`glass-card p-6 rounded-3xl cursor-pointer transition-all duration-300 relative overflow-hidden ${
                   activeServer.id === server.id 
-                    ? 'border-fuchsia-400 bg-[#1e083d]/90 shadow-[0_0_30px_rgba(217,70,239,0.15)]' 
-                    : 'border-purple-800/40 hover:border-purple-600/80 bg-[#120422]'
+                    ? 'border-[#7A00FF] shadow-[0_0_20px_rgba(122,0,255,0.2)] bg-[#1A0730]' 
+                    : 'hover:border-[#7A00FF]/50'
                 }`}
               >
                 {activeServer.id === server.id && (
-                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-violet-400 to-fuchsia-500" />
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#3B0764] via-[#9333EA] to-[#3B0764]" />
                 )}
 
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <span className="text-3xl">{server.flag}</span>
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-4">
+                    <span className="text-4xl drop-shadow-md">{server.flag}</span>
                     <div>
-                      <h4 className="font-bold text-white text-base">{server.country}</h4>
-                      <p className="text-xs text-purple-300/70">{server.city}</p>
+                      <h4 className="font-bold text-[#F5F0FF] text-base">{server.country}</h4>
+                      <p className="text-xs text-[#B8A6CC]">{server.city}</p>
                     </div>
                   </div>
                   
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-950/40 border border-emerald-800/40 text-emerald-400 dir-ltr">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-[#34D399]/10 border border-[#34D399]/30 text-[#34D399] dir-ltr">
+                    <span className="w-2 h-2 rounded-full bg-[#34D399] animate-pulse" />
                     {server.ping} ms
                   </span>
                 </div>
 
-                <div className="space-y-2 pt-3 border-t border-purple-900/50 text-xs">
-                  <div className="flex justify-between text-purple-300/80">
-                    <span>پروتکل پشتیبانی:</span>
-                    <span className="text-purple-100 font-mono">{server.protocol}</span>
+                <div className="space-y-3 pt-4 border-t border-[#3B0764]">
+                  <div className="flex justify-between text-[#B8A6CC] text-xs">
+                    <span>پروتکل:</span>
+                    <span className="text-[#C084FC] font-mono font-bold">{server.protocol}</span>
                   </div>
                   
-                  <div className="space-y-1">
-                    <div className="flex justify-between text-purple-300/80">
-                      <span>ترافیک مصرفی سرور:</span>
-                      <span className="text-fuchsia-400 font-bold dir-ltr">{server.load}%</span>
+                  <div className="space-y-1.5">
+                    <div className="flex justify-between text-[#B8A6CC] text-xs">
+                      <span>ترافیک مصرفی:</span>
+                      <span className="text-[#9333EA] font-bold dir-ltr">{server.load}%</span>
                     </div>
-                    <div className="w-full h-1.5 bg-[#1e0a38] rounded-full overflow-hidden">
+                    <div className="w-full h-2 bg-[#090312] rounded-full overflow-hidden border border-[#3B0764]">
                       <div 
-                        className="h-full bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-full"
+                        className="h-full bg-gradient-to-r from-[#7A00FF] to-[#C084FC] rounded-full"
                         style={{ width: `${server.load}%` }}
                       />
                     </div>
                   </div>
-                </div>
-
-                <div className="mt-4 pt-3 flex items-center justify-between">
-                  <span className="text-[11px] text-purple-400/60">مخصوص گیمینگ و ترید</span>
-                  <button className="text-xs font-bold text-fuchsia-400 hover:text-fuchsia-300 flex items-center gap-1">
-                    تست اتصال
-                    <ChevronRight className="w-3.5 h-3.5 rotate-180" />
-                  </button>
                 </div>
               </div>
             ))}
@@ -746,357 +548,197 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-xs uppercase tracking-widest font-extrabold text-fuchsia-400 mb-2">WHY CHOOSE US</h2>
-            <h3 className="text-3xl sm:text-5xl font-extrabold text-white mb-4">
-              مزایای منحصر به فرد ایزو وی‌پی‌ان
-            </h3>
-            <p className="text-purple-200/80 text-base sm:text-lg">
-              طراحی شده با استفاده از پیشرفته‌ترین متدهای لایه امنیت شبکه جهت عبور بی دردسر از محدودیت‌ها
-            </p>
+            <h2 className="text-xs uppercase tracking-widest font-bold text-[#9333EA] mb-2">FEATURES</h2>
+            <h3 className="text-3xl sm:text-5xl font-black text-[#F5F0FF] mb-4">قدرت و امنیت بی‌نظیر</h3>
+            <p className="text-[#B8A6CC] text-base sm:text-lg">پایدارترین سرویس متناسب با نیازهای حرفه‌ای شما</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             
-            <div className="glass-card p-8 rounded-3xl border-purple-800/40 glass-card-hover space-y-4">
-              <div className="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/30 text-purple-400 flex items-center justify-center">
-                <Zap className="w-7 h-7" />
+            {[
+              { icon: Zap, title: 'پینگ فوق پایین', desc: 'مسیریابی مستقیم (Direct Route) مخصوص بازی‌های آنلاین و ترید با کمترین تاخیر.' },
+              { icon: Lock, title: 'پروتکل VLESS Reality', desc: 'ترافیک کاملاً شبیه‌سازی‌شده به پروتکل امن TLS برای جلوگیری از مسدودی.' },
+              { icon: Shield, title: 'کیل سوئیچ (Kill Switch)', desc: 'انسداد فوری ترافیک در صورت افت اینترنت جهت محافظت از آی‌پی واقعی شما.' },
+              { icon: Users, title: 'اتصال چند کاربره', desc: 'استفاده همزمان روی موبایل، لپ‌تاپ و تبلت با یک اشتراک بدون افت سرعت.' },
+              { icon: EyeOff, title: 'بدون ثبت لوگ (No-Logs)', desc: 'حریم خصوصی کامل. هیچ تاریخچه وب‌گردی یا آی‌پی روی سرور ذخیره نمی‌شود.' },
+              { icon: CheckCircle2, title: 'پشتیبانی ۲۴/۷', desc: 'تیم کارشناسان شبکه ما آماده راهنمایی و تنظیمات نرم‌افزاری در تمام ساعات.' }
+            ].map((feature, idx) => (
+              <div key={idx} className="glass-card p-8 rounded-3xl glass-card-hover space-y-4">
+                <div className="w-14 h-14 rounded-2xl bg-[#090312] border border-[#7A00FF]/40 text-[#9333EA] flex items-center justify-center shadow-[0_0_15px_rgba(122,0,255,0.2)]">
+                  <feature.icon className="w-6 h-6" />
+                </div>
+                <h4 className="text-xl font-bold text-[#F5F0FF]">{feature.title}</h4>
+                <p className="text-[#B8A6CC] text-sm leading-relaxed">{feature.desc}</p>
               </div>
-              <h4 className="text-xl font-bold text-white">پینگ بسیار پایین (Low Ping)</h4>
-              <p className="text-purple-300/70 text-sm leading-relaxed">
-                مسیریابی مستقیم (Direct Route) به دیتاسنترهای اروپایی برای کاهش حداکثری پینگ مخصوص بازی‌های آنلاین نظیر PubG, Valorant و Call of Duty.
-              </p>
-            </div>
-
-            <div className="glass-card p-8 rounded-3xl border-purple-800/40 glass-card-hover space-y-4">
-              <div className="w-14 h-14 rounded-2xl bg-fuchsia-500/10 border border-fuchsia-500/30 text-fuchsia-400 flex items-center justify-center">
-                <Lock className="w-7 h-7" />
-              </div>
-              <h4 className="text-xl font-bold text-white">پروتکل ضد شناسایی VLESS Reality</h4>
-              <p className="text-purple-300/70 text-sm leading-relaxed">
-                ترافیک خروجی کاملاً شبیه‌سازی‌شده به پروتکل امن TLS وب‌سایت‌های بین‌المللی است تا از شناسایی و مسدودی پورت‌ها جلوگیری شود.
-              </p>
-            </div>
-
-            <div className="glass-card p-8 rounded-3xl border-purple-800/40 glass-card-hover space-y-4">
-              <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center">
-                <Shield className="w-7 h-7" />
-              </div>
-              <h4 className="text-xl font-bold text-white">کلید قطع اضطراری (Kill Switch)</h4>
-              <p className="text-purple-300/70 text-sm leading-relaxed">
-                در صورت افت ناگهانی اینترنت، تمامی ترافیک مسدود می‌شود تا آی‌پی واقعی شما هرگز برای صرافی‌ها و سایت‌های حساس افشا نشود.
-              </p>
-            </div>
-
-            <div className="glass-card p-8 rounded-3xl border-purple-800/40 glass-card-hover space-y-4">
-              <div className="w-14 h-14 rounded-2xl bg-violet-500/10 border border-violet-500/30 text-violet-400 flex items-center justify-center">
-                <Users className="w-7 h-7" />
-              </div>
-              <h4 className="text-xl font-bold text-white">اتصال همزمان چند کاربره</h4>
-              <p className="text-purple-300/70 text-sm leading-relaxed">
-                قابلیت استفاده همزمان یک اشتراک بر روی موبایل، تبلت، لپ‌تاپ و تمامی دستگاه‌های اعضای خانواده بدون کاهش سرعت.
-              </p>
-            </div>
-
-            <div className="glass-card p-8 rounded-3xl border-purple-800/40 glass-card-hover space-y-4">
-              <div className="w-14 h-14 rounded-2xl bg-pink-500/10 border border-pink-500/30 text-pink-400 flex items-center justify-center">
-                <EyeOff className="w-7 h-7" />
-              </div>
-              <h4 className="text-xl font-bold text-white">سیاست عدم ثبت لوگ (No-Logs)</h4>
-              <p className="text-purple-300/70 text-sm leading-relaxed">
-                هیچ‌گونه تاریخچه وب‌گردی، آدرس IP یا اطلاعات شخصی کاربر بر روی سرورها ذخیره نخواهد شد. حریم خصوصی شما ۱۰۰٪ تضمین شده است.
-              </p>
-            </div>
-
-            <div className="glass-card p-8 rounded-3xl border-purple-800/40 glass-card-hover space-y-4">
-              <div className="w-14 h-14 rounded-2xl bg-purple-400/10 border border-purple-400/30 text-purple-300 flex items-center justify-center">
-                <HeadphonesIcon className="w-7 h-7" />
-              </div>
-              <h4 className="text-xl font-bold text-white">پشتیبانی ۲۴/۷ تلگرام و تیکت</h4>
-              <p className="text-purple-300/70 text-sm leading-relaxed">
-                تیم کارشناسان شبکه ما در تمامی ساعات شبانه‌روز آماده راهنمایی، رفع مشکلات فنی و تنظیمات نرم‌افزاری شما هستند.
-              </p>
-            </div>
+            ))}
 
           </div>
         </div>
       </section>
 
-      {/* PRICING CARDS */}
-      <section id="pricing" className="py-24 bg-[#0d031a]/80 border-t border-purple-900/40 relative">
+      {/* PRICING CARDS (Reference #2 Style) */}
+      <section id="pricing" className="py-24 bg-[#090312] relative border-t border-[#3B0764]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-xs uppercase tracking-widest font-extrabold text-fuchsia-400 mb-2">PRICING PLANS</h2>
-            <h3 className="text-3xl sm:text-5xl font-extrabold text-white mb-4">
-              تعرفه‌ها و اشتراک‌های اختصاصی
-            </h3>
-            <p className="text-purple-200/80 text-base sm:text-lg mb-8">
-              تحویل فوری آنی بلافاصله پس از پرداخت + پشتیبانی کانفیگ اختصاصی
-            </p>
+            <h2 className="text-xs uppercase tracking-widest font-bold text-[#9333EA] mb-2">PRICING</h2>
+            <h3 className="text-3xl sm:text-5xl font-black text-[#F5F0FF] mb-6">اشتراک‌های اختصاصی</h3>
 
-            <div className="inline-flex items-center gap-3 p-1.5 bg-[#140526] border border-purple-800/50 rounded-2xl">
+            <div className="inline-flex items-center gap-2 p-1.5 bg-[#150526] border border-[#3B0764] rounded-full">
               <button
                 onClick={() => setBillingCycle('monthly')}
-                className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all ${
+                className={`px-8 py-2.5 rounded-full text-sm font-bold transition-all ${
                   billingCycle === 'monthly'
-                    ? 'bg-purple-600 text-white shadow-md shadow-purple-600/30'
-                    : 'text-purple-300 hover:text-white'
+                    ? 'bg-[#7A00FF] text-white shadow-[0_0_15px_rgba(122,0,255,0.4)]'
+                    : 'text-[#B8A6CC] hover:text-[#F5F0FF]'
                 }`}
               >
-                اشتراک ماهانه
+                ماهانه
               </button>
               <button
                 onClick={() => setBillingCycle('yearly')}
-                className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all flex items-center gap-2 ${
+                className={`px-8 py-2.5 rounded-full text-sm font-bold transition-all flex items-center gap-2 ${
                   billingCycle === 'yearly'
-                    ? 'bg-purple-600 text-white shadow-md shadow-purple-600/30'
-                    : 'text-purple-300 hover:text-white'
+                    ? 'bg-[#7A00FF] text-white shadow-[0_0_15px_rgba(122,0,255,0.4)]'
+                    : 'text-[#B8A6CC] hover:text-[#F5F0FF]'
                 }`}
               >
-                اشتراک سالانه
-                <span className="px-2 py-0.5 rounded-full bg-fuchsia-500 text-white text-[10px] font-black">
-                  ۳۰٪ تخفیف
+                سالانه
+                <span className="px-2 py-0.5 rounded-full bg-[#150526] border border-[#3B0764] text-[#C084FC] text-[10px]">
+                  ۲۰٪ تخفیف
                 </span>
               </button>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch max-w-5xl mx-auto">
             
-            <div className="glass-card p-8 rounded-3xl border-purple-800/40 flex flex-col justify-between hover:border-purple-600/50 transition-all bg-[#120422]">
+            {/* Plan 1 */}
+            <div className="glass-card p-8 rounded-[2rem] flex flex-col justify-between hover:border-[#7A00FF]/50 transition-all mt-4 md:mt-8">
               <div>
-                <div className="inline-block px-3 py-1 rounded-full bg-purple-900/50 border border-purple-800/60 text-purple-200 text-xs font-bold mb-4">
-                  پلن برنز / یک ماهه
+                <div className="w-12 h-12 rounded-2xl bg-[#090312] border border-[#3B0764] flex items-center justify-center mb-6">
+                  <Shield className="w-5 h-5 text-[#B8A6CC]" />
                 </div>
-                <h4 className="text-2xl font-black text-white">اشتراک اقتصادی</h4>
-                <p className="text-xs text-purple-300/70 mt-1">مناسب استفاده روزمره و وب‌گردی</p>
-
-                <div className="my-6 pb-6 border-b border-purple-900/50">
-                  <span className="text-4xl font-black text-white dir-ltr">
-                    {billingCycle === 'monthly' ? '۹۹,۰۰۰' : '۷۹,۰۰۰'}
-                  </span>
-                  <span className="text-purple-300/70 text-sm mr-2">تومان / ماهانه</span>
+                <h4 className="text-2xl font-bold text-[#F5F0FF]">برنز</h4>
+                <p className="text-sm text-[#B8A6CC] mt-2 h-10">مناسب وب‌گردی روزمره با سرعت مطلوب.</p>
+                <div className="my-6 pb-6 border-b border-[#3B0764]">
+                  <span className="text-4xl font-black text-[#F5F0FF] dir-ltr">{billingCycle === 'monthly' ? '۹۹,۰۰۰' : '۷۹,۰۰۰'}</span>
+                  <span className="text-[#B8A6CC] text-xs mr-1">/ماهانه</span>
                 </div>
-
-                <ul className="space-y-4 text-sm text-purple-200 mb-8">
-                  <li className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-purple-400 shrink-0" />
-                    <span>حجم ۵۰ گیگابایت بین‌الملل</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-purple-400 shrink-0" />
-                    <span>اتصال ۲ کاربر همزمان</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-purple-400 shrink-0" />
-                    <span>دسترسی به تمامی سرورها</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-purple-400 shrink-0" />
-                    <span>پروتکل V2Ray (VLESS+VMess)</span>
-                  </li>
-                  <li className="flex items-center gap-3 text-purple-500/50">
-                    <X className="w-5 h-5 shrink-0" />
-                    <span>آی‌پی اختصاصی (Static IP)</span>
-                  </li>
+                <ul className="space-y-4 text-sm text-[#B8A6CC] mb-8">
+                  <li className="flex items-center gap-3"><Check className="w-5 h-5 text-[#9333EA] shrink-0" /> ۵۰ گیگابایت حجم</li>
+                  <li className="flex items-center gap-3"><Check className="w-5 h-5 text-[#9333EA] shrink-0" /> ۲ کاربر همزمان</li>
+                  <li className="flex items-center gap-3"><Check className="w-5 h-5 text-[#9333EA] shrink-0" /> دسترسی استاندارد</li>
+                  <li className="flex items-center gap-3"><Check className="w-5 h-5 text-[#9333EA] shrink-0" /> پشتیبانی تیکت</li>
                 </ul>
               </div>
-
-              <button 
-                onClick={() => openPlanModal('اشتراک اقتصادی', billingCycle === 'monthly' ? '۹۹,۰۰۰ تومان' : '۹۴۸,۰۰۰ تومان')}
-                className="w-full py-4 rounded-xl border border-purple-700/60 bg-[#1a0833] hover:bg-[#250b4a] font-bold text-white transition-colors"
-              >
-                سفارش پلن اقتصادی
+              <button onClick={() => openPlanModal('اقتصادی', '۹۹,۰۰۰')} className="w-full py-4 rounded-full border border-[#3B0764] hover:border-[#7A00FF] bg-transparent font-bold text-[#F5F0FF] transition-all">
+                انتخاب برنز
               </button>
             </div>
 
-            <div className="relative glass-card p-8 rounded-3xl border-fuchsia-500/40 bg-gradient-to-b from-[#180530] via-[#150529] to-[#2d0954]/30 flex flex-col justify-between shadow-[0_0_50px_rgba(217,70,239,0.15)] md:-translate-y-4">
+            {/* Plan 2 VIP (Light Leak Effect) */}
+            <div className="relative p-8 rounded-[2rem] border border-[#7A00FF] bg-[#150526] shadow-[0_0_50px_rgba(122,0,255,0.15)] flex flex-col justify-between overflow-hidden">
+              {/* Reference #2 Top Right Diagonal Glow Leak */}
+              <div className="absolute -top-16 -right-16 w-64 h-24 bg-[#C084FC] blur-[50px] opacity-40 rotate-45 pointer-events-none" />
               
-              <div className="absolute -top-4 right-1/2 translate-x-1/2 px-4 py-1.5 rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white text-xs font-black shadow-lg shadow-fuchsia-500/30 whitespace-nowrap">
-                محبوب‌ترین پیشنهاد کاربران
-              </div>
-
-              <div>
-                <div className="inline-block px-3 py-1 rounded-full bg-fuchsia-500/20 border border-fuchsia-500/30 text-fuchsia-300 text-xs font-bold mb-4 mt-2">
-                  پلن نقره‌ای / نامحدود
+              <div className="relative z-10">
+                <div className="w-12 h-12 rounded-2xl bg-[#7A00FF] flex items-center justify-center mb-6 shadow-[0_0_15px_rgba(122,0,255,0.5)]">
+                  <Zap className="w-5 h-5 text-white" />
                 </div>
-                <h4 className="text-2xl font-black text-white">اشتراک حرفه‌ای VIP</h4>
-                <p className="text-xs text-fuchsia-400 mt-1">ویژه اینستاگرام، یوتیوب و ترید</p>
-
-                <div className="my-6 pb-6 border-b border-purple-800/50">
-                  <span className="text-4xl font-black text-fuchsia-400 dir-ltr">
-                    {billingCycle === 'monthly' ? '۱۸۹,۰۰۰' : '۱۳۹,۰۰۰'}
-                  </span>
-                  <span className="text-purple-300/70 text-sm mr-2">تومان / ماهانه</span>
+                <h4 className="text-2xl font-bold text-[#F5F0FF]">حرفه‌ای VIP</h4>
+                <p className="text-sm text-[#C084FC] mt-2 h-10">ویژه اینستاگرام، گیمینگ و یوتیوب.</p>
+                <div className="my-6 pb-6 border-b border-[#3B0764]">
+                  <span className="text-4xl font-black text-[#F5F0FF] dir-ltr">{billingCycle === 'monthly' ? '۱۸۹,۰۰۰' : '۱۳۹,۰۰۰'}</span>
+                  <span className="text-[#B8A6CC] text-xs mr-1">/ماهانه</span>
                 </div>
-
-                <ul className="space-y-4 text-sm text-purple-100 mb-8">
-                  <li className="flex items-center gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-fuchsia-400 shrink-0" />
-                    <span className="font-bold text-white">ترافیک کاملاً نامحدود</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-fuchsia-400 shrink-0" />
-                    <span>اتصال ۳ کاربر همزمان</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-fuchsia-400 shrink-0" />
-                    <span>سرورهای اختصاصی WireGuard & Reality</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-fuchsia-400 shrink-0" />
-                    <span>پینگ پایین مخصوص گیمینگ</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-fuchsia-400 shrink-0" />
-                    <span>پشتیبانی اولویت‌دار تیکت</span>
-                  </li>
+                <ul className="space-y-4 text-sm text-[#F5F0FF] mb-8 font-medium">
+                  <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-[#9333EA] shrink-0" /> ترافیک نامحدود واقعی</li>
+                  <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-[#9333EA] shrink-0" /> ۳ کاربر همزمان</li>
+                  <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-[#9333EA] shrink-0" /> پینگ پایین گیمینگ</li>
+                  <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-[#9333EA] shrink-0" /> سرور Reality اختصاصی</li>
                 </ul>
               </div>
-
-              <button 
-                onClick={() => openPlanModal('اشتراک حرفه‌ای VIP', billingCycle === 'monthly' ? '۱۸۹,۰۰۰ تومان' : '۱,۶۶۸,۰۰۰ تومان')}
-                className="w-full py-4 rounded-xl bg-gradient-to-r from-violet-600 via-purple-500 to-fuchsia-500 text-white font-black shadow-lg shadow-fuchsia-500/30 hover:scale-[1.02] active:scale-[0.98] transition-all"
-              >
-                خرید پلن حرفه‌ای نامحدود
+              <button onClick={() => openPlanModal('حرفه‌ای VIP', '۱۸۹,۰۰۰')} className="relative z-10 w-full py-4 rounded-full bg-[#7A00FF] hover:bg-[#9333EA] font-bold text-white shadow-[0_0_20px_rgba(122,0,255,0.4)] transition-all">
+                خرید VIP
               </button>
             </div>
 
-            <div className="glass-card p-8 rounded-3xl border-purple-800/40 flex flex-col justify-between hover:border-pink-500/40 transition-all bg-[#120422]">
+            {/* Plan 3 */}
+            <div className="glass-card p-8 rounded-[2rem] flex flex-col justify-between hover:border-[#7A00FF]/50 transition-all mt-4 md:mt-8">
               <div>
-                <div className="inline-block px-3 py-1 rounded-full bg-pink-500/20 border border-pink-500/30 text-pink-300 text-xs font-bold mb-4">
-                  پلن طلایی / ۱ ساله
+                <div className="w-12 h-12 rounded-2xl bg-[#090312] border border-[#3B0764] flex items-center justify-center mb-6">
+                  <Globe className="w-5 h-5 text-[#B8A6CC]" />
                 </div>
-                <h4 className="text-2xl font-black text-white">اشتراک سازمانی & ترید</h4>
-                <p className="text-xs text-purple-300/70 mt-1">برای صرافی‌های بین‌المللی و شرکت‌ها</p>
-
-                <div className="my-6 pb-6 border-b border-purple-900/50">
-                  <span className="text-4xl font-black text-pink-400 dir-ltr">
-                    {billingCycle === 'monthly' ? '۲۹۹,۰۰۰' : '۲۱۹,۰۰۰'}
-                  </span>
-                  <span className="text-purple-300/70 text-sm mr-2">تومان / ماهانه</span>
+                <h4 className="text-2xl font-bold text-[#F5F0FF]">سازمانی</h4>
+                <p className="text-sm text-[#B8A6CC] mt-2 h-10">طراحی شده برای صرافی‌ها و تیم‌ها.</p>
+                <div className="my-6 pb-6 border-b border-[#3B0764]">
+                  <span className="text-4xl font-black text-[#F5F0FF] dir-ltr">{billingCycle === 'monthly' ? '۲۹۹,۰۰۰' : '۲۱۹,۰۰۰'}</span>
+                  <span className="text-[#B8A6CC] text-xs mr-1">/ماهانه</span>
                 </div>
-
-                <ul className="space-y-4 text-sm text-purple-200 mb-8">
-                  <li className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-pink-400 shrink-0" />
-                    <span className="font-bold text-white">آی‌پی ثابت (Dedicated IP)</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-pink-400 shrink-0" />
-                    <span>ترافیک نامحدود با پهنای ۱۰ گیگابیت</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-pink-400 shrink-0" />
-                    <span>اتصال ۵ کاربر همزمان</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-pink-400 shrink-0" />
-                    <span>قابلیت Multi-Hop (تونل دوگانه)</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-pink-400 shrink-0" />
-                    <span>پشتیبانی تلفنی و اختصاصی</span>
-                  </li>
+                <ul className="space-y-4 text-sm text-[#B8A6CC] mb-8">
+                  <li className="flex items-center gap-3"><Check className="w-5 h-5 text-[#9333EA] shrink-0" /> آی‌پی ثابت اختصاصی</li>
+                  <li className="flex items-center gap-3"><Check className="w-5 h-5 text-[#9333EA] shrink-0" /> ۵ کاربر همزمان</li>
+                  <li className="flex items-center gap-3"><Check className="w-5 h-5 text-[#9333EA] shrink-0" /> پورت ۱۰ گیگابیت</li>
+                  <li className="flex items-center gap-3"><Check className="w-5 h-5 text-[#9333EA] shrink-0" /> پشتیبانی تلفنی</li>
                 </ul>
               </div>
-
-              <button 
-                onClick={() => openPlanModal('اشتراک سازمانی & ترید', billingCycle === 'monthly' ? '۲۹۹,۰۰۰ تومان' : '۲,۶۲۸,۰۰۰ تومان')}
-                className="w-full py-4 rounded-xl border border-pink-500/30 bg-[#290a36]/40 hover:bg-[#3d0f52]/60 text-pink-200 font-bold transition-colors"
-              >
-                سفارش پلن اختصاصی ترید
+              <button onClick={() => openPlanModal('سازمانی', '۲۹۹,۰۰۰')} className="w-full py-4 rounded-full border border-[#3B0764] hover:border-[#7A00FF] bg-transparent font-bold text-[#F5F0FF] transition-all">
+                تماس برای سفارش
               </button>
             </div>
 
           </div>
-
         </div>
       </section>
 
-      {/* FAQ ACCORDION SECTION */}
-      <section id="faq" className="py-24 relative">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+      {/* FAQ SECTION */}
+      <section id="faq" className="py-24 border-t border-[#3B0764] relative">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-xs uppercase tracking-widest font-extrabold text-fuchsia-400 mb-2">FAQ</h2>
-            <h3 className="text-3xl sm:text-5xl font-extrabold text-white mb-4">
-              سوالات متداول کاربران
-            </h3>
-            <p className="text-purple-200/80 text-base">
-              پاسخ به رایج‌ترین پرسش‌های شما درباره سرویس ایزو وی‌پی‌ان
-            </p>
+            <h3 className="text-3xl font-black text-[#F5F0FF] mb-4">سوالات متداول</h3>
           </div>
-
           <div className="space-y-4">
             {[
-              {
-                q: 'آیا ایزو وی‌پی‌ان روی تمامی اپراتورها (همراه اول، ایرانسل، مخابرات و...) کار می‌کند؟',
-                a: 'بله، تمامی سرورهای ایزو وی‌پی‌ان مجهز به پروتکل VLESS Reality و فیلترشکن اختصاصی WireGuard هستند که با تمامی اپراتورهای همراه و خانگی ایران کاملاً سازگار بوده و بدون افت سرعت متصل می‌شوند.'
-              },
-              {
-                q: 'تحویل اشتراک پس از خرید به چه صورت انجام می‌شود؟',
-                a: 'بلافاصله پس از تکمیل پرداخت آنلاین، مشخصات اشتراک، لینک اختصاصی کانفیگ و آموزش تصویری نصب کلاینت‌ها روی تمامی دستگاه‌ها به صورت آنی به شما نمایش داده شده و پیامک/ایمیل می‌شود.'
-              },
-              {
-                q: 'پروتون‌ها و نرم‌افزارهای مورد نیاز جهت اتصال کدامند؟',
-                a: 'شما می‌توانید از نرم‌افزارهای استاندارد مانند v2rayNG (اندروید)، Sing-box / Streisand / Foxray (آیفون)، v2rayN (ویندوز) و Nekoray (مک و لینوکس) استفاده کنید.'
-              },
-              {
-                q: 'آیا سرورها برای ترید در بایننس و صرافی‌ها امن است؟',
-                a: 'بله، پلن‌های اختصاصی و سازمانی ما دارای آی‌پی کاملاً ثابت (Static IP) از کشور آلمان و هلند هستند و هیچ نشت IP/DNS ندارند که برای فعالیت در صرافی‌های ارز دیجیتال کاملاً ایده‌آل است.'
-              },
-              {
-                q: 'آیا ضمانت بازگشت وجه وجود دارد؟',
-                a: 'بله، در صورت عدم رضایت یا وجود هرگونه مشکل فنی اصلاح نشدنی تا ۴۸ ساعت امکان استرداد کامل وجه پرداختی وجود دارد.'
-              }
+              { q: 'آیا روی تمامی اپراتورها کار می‌کند؟', a: 'بله، تمامی سرورها مجهز به پروتکل VLESS Reality بوده و با همراه اول، ایرانسل و مخابرات سازگارند.' },
+              { q: 'تحویل اشتراک چگونه است؟', a: 'بلافاصله پس از پرداخت آنلاین، مشخصات و لینک کانفیگ به همراه آموزش تصویری نمایش داده می‌شود.' },
+              { q: 'آیا برای ترید امن است؟', a: 'بله، پلن سازمانی دارای آی‌پی ثابت (Static IP) بدون نشت DNS مناسب صرافی‌ها است.' }
             ].map((faq, idx) => (
-              <div 
-                key={idx}
-                className="glass-card rounded-2xl border-purple-800/30 overflow-hidden transition-all duration-300 bg-[#120422]"
-              >
+              <div key={idx} className="glass-card rounded-2xl overflow-hidden transition-all duration-300">
                 <button
                   onClick={() => setOpenFaq(openFaq === idx ? -1 : idx)}
-                  className="w-full p-6 text-right flex items-center justify-between gap-4 font-bold text-base sm:text-lg text-white hover:text-fuchsia-400 transition-colors"
+                  className="w-full p-6 text-right flex items-center justify-between font-bold text-[#F5F0FF] hover:text-[#C084FC] transition-colors"
                 >
                   <span>{faq.q}</span>
-                  <ChevronDown className={`w-5 h-5 text-fuchsia-400 shrink-0 transition-transform duration-300 ${openFaq === idx ? 'rotate-180' : ''}`} />
+                  <ChevronDown className={`w-5 h-5 text-[#9333EA] shrink-0 transition-transform ${openFaq === idx ? 'rotate-180' : ''}`} />
                 </button>
-                
                 {openFaq === idx && (
-                  <div className="px-6 pb-6 text-purple-200/80 text-sm sm:text-base leading-relaxed border-t border-purple-900/40 pt-4">
+                  <div className="px-6 pb-6 text-[#B8A6CC] text-sm leading-relaxed border-t border-[#3B0764] pt-4">
                     {faq.a}
                   </div>
                 )}
               </div>
             ))}
           </div>
-
         </div>
       </section>
 
-      {/* FOOTER CALL TO ACTION */}
-      <section className="py-20 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative rounded-3xl p-8 sm:p-12 overflow-hidden bg-gradient-to-r from-violet-700 via-purple-600 to-fuchsia-600 text-white shadow-2xl shadow-purple-500/20">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-2xl pointer-events-none" />
-
-            <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8 text-center lg:text-right">
-              <div className="space-y-3">
-                <h3 className="text-3xl sm:text-4xl font-black text-white">
-                  آماده اتصال به اینترنت پرسرعت و بدون مرز هستید؟
-                </h3>
-                <p className="text-purple-100 font-medium text-base sm:text-lg">
-                  همین الان اشتراک خود را فعال کنید و از کیفیت بی‌نظیر ایزو وی‌پی‌ان لذت ببرید.
-                </p>
-              </div>
-
-              <a
-                href="#pricing"
-                className="px-8 py-4 rounded-2xl bg-white text-purple-900 hover:bg-purple-50 font-extrabold text-base sm:text-lg shrink-0 shadow-xl flex items-center gap-2 hover:scale-105 transition-all"
-              >
-                <Zap className="w-5 h-5 text-fuchsia-600 fill-current" />
-                خرید آنلاین و تحویل آنی
+      {/* FOOTER CTA (Reference #3 Style) */}
+      <section className="py-12 bg-[#090312] relative overflow-hidden">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative rounded-[2rem] p-10 sm:p-14 bg-gradient-to-br from-[#3B0764] via-[#150526] to-[#090312] border border-[#7A00FF]/40 shadow-[0_0_50px_rgba(122,0,255,0.15)] flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="absolute top-0 right-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10 pointer-events-none mix-blend-overlay"></div>
+            
+            <div className="space-y-3 z-10 text-center md:text-right">
+              <h3 className="text-3xl font-black text-[#F5F0FF]">شروع سفر آزاد شما</h3>
+              <p className="text-[#C084FC] text-sm">همین الان به هزاران کاربر فعال ایزو وی‌پی‌ان بپیوندید.</p>
+            </div>
+            <div className="flex gap-4 z-10">
+              <a href="#pricing" className="px-8 py-4 rounded-full bg-[#150526] border border-[#3B0764] text-[#F5F0FF] font-bold text-sm hover:border-[#7A00FF] transition-all">
+                راهنمای اتصال
+              </a>
+              <a href="#pricing" className="px-8 py-4 rounded-full bg-[#F5F0FF] text-[#090312] font-black text-sm shadow-[0_0_20px_rgba(245,240,255,0.3)] hover:scale-105 transition-transform">
+                خرید آنلاین
               </a>
             </div>
           </div>
@@ -1104,152 +746,64 @@ export default function App() {
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-[#08010d] border-t border-purple-900/40 pt-16 pb-12 text-purple-400/60 text-sm">
+      <footer className="bg-[#090312] pt-12 pb-8 text-[#B8A6CC] text-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
-            
-            <div className="lg:col-span-2 space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+            <div className="md:col-span-2 space-y-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 to-fuchsia-500 p-[2px]">
-                  <div className="w-full h-full bg-[#130524] rounded-[10px] flex items-center justify-center">
-                    <Shield className="w-5 h-5 text-fuchsia-400 fill-fuchsia-400/20" />
-                  </div>
-                </div>
-                <span className="text-xl font-extrabold text-white">ISO VPN</span>
+                <Shield className="w-6 h-6 text-[#9333EA]" />
+                <span className="text-xl font-black text-[#F5F0FF]">ISO VPN</span>
               </div>
-              <p className="text-purple-300/70 text-xs sm:text-sm leading-relaxed max-w-sm">
-                ارائه‌دهنده سرویس‌های اختصاصی و فوق‌سریع وی‌پی‌ان مبتنی بر آخرین پروتکل‌های امنیتی شبکه. اتصال پایدار و بدون قطعی برای تمامی کاربران ایرانی.
-              </p>
-              <div className="flex items-center gap-2 text-xs text-emerald-400 pt-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span>تمامی شبکه و سرورها در وضعیت آنلاین هستند</span>
-              </div>
+              <p className="text-xs leading-relaxed max-w-sm">ارائه‌دهنده سرویس‌های اختصاصی وی‌پی‌ان بر بستر امن‌ترین دیتاسنترهای اروپا. اینترنت بدون مرز، ایمن و پرسرعت.</p>
             </div>
-
             <div className="space-y-3">
-              <h5 className="text-white font-bold text-sm">دسترسی سریع</h5>
+              <h5 className="text-[#F5F0FF] font-bold text-sm">دسترسی سریع</h5>
               <ul className="space-y-2 text-xs">
-                <li><a href="#features" className="hover:text-fuchsia-400 transition-colors">ویژگی‌های شبکه</a></li>
-                <li><a href="#servers" className="hover:text-fuchsia-400 transition-colors">لیست سرورها</a></li>
-                <li><a href="#pricing" className="hover:text-fuchsia-400 transition-colors">پلن‌های قیمت</a></li>
-                <li><a href="#dashboard" className="hover:text-fuchsia-400 transition-colors">تست زنده پینگ</a></li>
+                <li><a href="#servers" className="hover:text-[#9333EA]">سرورها</a></li>
+                <li><a href="#pricing" className="hover:text-[#9333EA]">تعرفه‌ها</a></li>
+                <li><a href="#faq" className="hover:text-[#9333EA]">سوالات متداول</a></li>
               </ul>
             </div>
-
             <div className="space-y-3">
-              <h5 className="text-white font-bold text-sm">دانلود برنامه‌ها</h5>
-              <ul className="space-y-2 text-xs">
-                <li><a href="#" className="hover:text-fuchsia-400 transition-colors">دانلود نسخه اندروید</a></li>
-                <li><a href="#" className="hover:text-fuchsia-400 transition-colors">دانلود نسخه آیفون (iOS)</a></li>
-                <li><a href="#" className="hover:text-fuchsia-400 transition-colors">دانلود نسخه ویندوز</a></li>
-                <li><a href="#" className="hover:text-fuchsia-400 transition-colors">راهنمای کانفیگ روتر</a></li>
-              </ul>
-            </div>
-
-            <div className="space-y-3">
-              <h5 className="text-white font-bold text-sm">پشتیبانی و ارتباط</h5>
+              <h5 className="text-[#F5F0FF] font-bold text-sm">ارتباط با ما</h5>
               <div className="space-y-2 text-xs">
-                <p className="text-purple-400/70">کانال تلگرام اطلاع‌رسانی:</p>
-                <a href="#" className="inline-flex items-center gap-1.5 text-fuchsia-400 hover:underline dir-ltr">
-                  <Send className="w-3.5 h-3.5" />
-                  @ISOVPN_Official
-                </a>
-                <p className="text-purple-400/70 pt-2">پشتیبانی ۲۴ ساعته:</p>
-                <a href="#" className="inline-flex items-center gap-1.5 text-violet-400 hover:underline dir-ltr">
-                  <Send className="w-3.5 h-3.5" />
-                  @ISOVPN_Support
-                </a>
+                <p>تلگرام: <span className="text-[#C084FC] dir-ltr">@ISOVPN_Support</span></p>
+                <p>ایمیل: <span className="text-[#C084FC] dir-ltr">info@isovpn.com</span></p>
               </div>
             </div>
-
           </div>
-
-          <div className="pt-8 border-t border-purple-900/30 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-purple-500/50">
-            <p>© ۲۰۲۶ تمامی حقوق برای ایزو وی‌پی‌ان (ISO VPN) محفوظ است.</p>
-            <div className="flex gap-6">
-              <a href="#" className="hover:text-purple-300 transition-colors">حریم خصوصی</a>
-              <a href="#" className="hover:text-purple-300 transition-colors">شرایط استفاده</a>
-              <a href="#" className="hover:text-purple-300 transition-colors">تضمین کیفیت</a>
-            </div>
+          <div className="pt-8 border-t border-[#3B0764] flex justify-between items-center text-xs text-[#B8A6CC]/50">
+            <p>© ۲۰۲۶ ISO VPN. تمامی حقوق محفوظ است.</p>
           </div>
         </div>
       </footer>
 
       {/* PURCHASE MODAL */}
       {isPurchaseModalOpen && selectedPlanModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0A0211]/90 backdrop-blur-md">
-          <div className="glass-card w-full max-w-md rounded-3xl p-6 sm:p-8 border-purple-700/50 bg-[#16052b] shadow-2xl relative space-y-6">
-            
-            <button 
-              onClick={() => setIsPurchaseModalOpen(false)}
-              className="absolute top-4 left-4 p-2 text-purple-400 hover:text-white rounded-lg bg-[#250b4a]"
-            >
-              <X className="w-5 h-5" />
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#090312]/90 backdrop-blur-md">
+          <div className="glass-card w-full max-w-md rounded-3xl p-8 relative space-y-6">
+            <button onClick={() => setIsPurchaseModalOpen(false)} className="absolute top-4 left-4 p-2 text-[#B8A6CC] hover:text-white rounded-full bg-[#090312] border border-[#3B0764]">
+              <X className="w-4 h-4" />
             </button>
-
             <div className="text-center space-y-2">
-              <div className="w-12 h-12 rounded-2xl bg-fuchsia-500/20 text-fuchsia-400 flex items-center justify-center mx-auto">
-                <Zap className="w-6 h-6" />
+              <div className="w-12 h-12 rounded-full bg-[#7A00FF]/20 text-[#9333EA] flex items-center justify-center mx-auto mb-4 border border-[#7A00FF]/30">
+                <Zap className="w-5 h-5" />
               </div>
-              <h3 className="text-xl font-bold text-white">تکمیل سفارش {selectedPlanModal.name}</h3>
-              <p className="text-xs text-purple-300/70">مبلغ قابل پرداخت: <span className="text-fuchsia-400 font-bold">{selectedPlanModal.price}</span></p>
+              <h3 className="text-xl font-bold text-[#F5F0FF]">سفارش {selectedPlanModal.name}</h3>
+              <p className="text-xs text-[#B8A6CC]">مبلغ: <span className="text-[#C084FC] font-bold">{selectedPlanModal.price}</span></p>
             </div>
-
             <div className="space-y-3">
-              <label className="text-xs font-bold text-purple-200 block">انتخاب روش پرداخت:</label>
-              
-              <button className="w-full p-4 rounded-xl border border-purple-800/60 bg-[#1d0838] hover:border-purple-500 hover:bg-[#280c4f] flex items-center justify-between text-sm font-bold text-white transition-all">
-                <span className="flex items-center gap-3">
-                  <span className="w-3 h-3 rounded-full bg-purple-400" />
-                  درگاه شتابی بانکی (کارت به کارت / آنلاین)
-                </span>
-                <ChevronRight className="w-4 h-4 rotate-180 text-purple-400/60" />
+              <button className="w-full p-4 rounded-full border border-[#3B0764] bg-[#090312] hover:border-[#7A00FF] flex justify-between text-sm font-bold text-[#F5F0FF] transition-all">
+                <span>پرداخت بانکی (شتاب)</span><ChevronRight className="w-4 h-4 rotate-180 text-[#B8A6CC]" />
               </button>
-
-              <button className="w-full p-4 rounded-xl border border-purple-800/60 bg-[#1d0838] hover:border-fuchsia-500 hover:bg-[#280c4f] flex items-center justify-between text-sm font-bold text-white transition-all">
-                <span className="flex items-center gap-3">
-                  <span className="w-3 h-3 rounded-full bg-fuchsia-400" />
-                  ارز دیجیتال (تتر USDT / TRX / TON)
-                </span>
-                <ChevronRight className="w-4 h-4 rotate-180 text-purple-400/60" />
+              <button className="w-full p-4 rounded-full border border-[#3B0764] bg-[#090312] hover:border-[#7A00FF] flex justify-between text-sm font-bold text-[#F5F0FF] transition-all">
+                <span>ارز دیجیتال (تتر/ترون)</span><ChevronRight className="w-4 h-4 rotate-180 text-[#B8A6CC]" />
               </button>
-
-              <button className="w-full p-4 rounded-xl border border-purple-800/60 bg-[#1d0838] hover:border-emerald-500 hover:bg-[#280c4f] flex items-center justify-between text-sm font-bold text-white transition-all">
-                <span className="flex items-center gap-3">
-                  <span className="w-3 h-3 rounded-full bg-emerald-400" />
-                  خرید مستقیم از ربات تلگرام
-                </span>
-                <ChevronRight className="w-4 h-4 rotate-180 text-purple-400/60" />
-              </button>
-            </div>
-
-            <div className="pt-2 text-center">
-              <p className="text-[11px] text-purple-400/50">
-                با خرید این سرویس شما شرایط و قوانین استفاده از ایزو وی‌پی‌ان را می‌پذیرید.
-              </p>
             </div>
           </div>
         </div>
       )}
 
     </div>
-  );
-}
-
-// Helper icon component for footer support
-function HeadphonesIcon(props) {
-  return (
-    <svg 
-      {...props} 
-      xmlns="http://www.w3.org/2000/svg" 
-      viewBox="0 0 24 24" 
-      fill="none" 
-      stroke="currentColor" 
-      strokeWidth="2" 
-      strokeLinecap="round" 
-      strokeLinejoin="round"
-    >
-      <path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3" />
-    </svg>
   );
 }
